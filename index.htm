@@ -1,27 +1,49 @@
 <html>
   <head allowpaymentrequest allow="usb; fullscreen">
     <script>
-      function connectUSBDevice(){
+      function connectIDTechUSBDevice(){
           navigator.usb.requestDevice({ filters: [{ vendorId: 0x0acd }] }) //ID Tech USB Hex ID
           .then(device => {
             console.log(device.productName);      
             console.log(device.manufacturerName);
+              return device.open(); // Begin a session.
           })
           .catch(error => { console.error(error); });
     
           // Get all connected USB devices the website has been granted access to.
-          navigator.usb.getDevices().then(devices => {
+          navigator.usb.getDevices()
+            .then(devices => {
             devices.forEach(device => {
               console.log(device.productName);      
               console.log(device.manufacturerName); 
             });
           })
       }
+
+      function connectMagtekUSBDevice(){
+          navigator.usb.requestDevice({ filters: [{ vendorId: 0x0801 }] }) //ID Tech USB Hex ID
+          .then(device => {
+            console.log(device.productName);      
+            console.log(device.manufacturerName);
+              return device.open(); // Begin a session.
+          })
+          .catch(error => { console.error(error); });
+    
+          // Get all connected USB devices the website has been granted access to.
+          navigator.usb.getDevices()
+            .then(devices => {
+            devices.forEach(device => {
+              console.log(device.productName);      
+              console.log(device.manufacturerName); 
+            });
+          })
+      }      
     </script>   
   </head>
 <body>
   <p>test</p>
-<input type="button" onclick="connectUSBDevice()" value="test" />
+<input type="button" onclick="connectIDTechUSBDevice()" value="Connect ID Tech" />
+<input type="button" onclick="connectMagtekUSBDevice()" value="Connect Magtek" />
 
 </body>
 </html>
