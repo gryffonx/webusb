@@ -1,31 +1,27 @@
 <html>
-  <head>
+  <head allowpaymentrequest allow="usb; fullscreen">
     <script>
-      navigator.usb.requestDevice({ filters: [{ vendorId: 0x0acd }] }) //ID Tech USB Hex ID
-      .then(device => {
-        console.log(device.productName);      
-        console.log(device.manufacturerName);
-      })
-      .catch(error => { console.error(error); });
-
-      // Get all connected USB devices the website has been granted access to.
-      navigator.usb.getDevices().then(devices => {
-        devices.forEach(device => {
-          console.log(device.productName);      
-          console.log(device.manufacturerName); 
-        });
-      })
-      
-
-    </script>
-   
+      function connectUSBDevice(){
+          navigator.usb.requestDevice({ filters: [{ vendorId: 0x0acd }] }) //ID Tech USB Hex ID
+          .then(device => {
+            console.log(device.productName);      
+            console.log(device.manufacturerName);
+          })
+          .catch(error => { console.error(error); });
+    
+          // Get all connected USB devices the website has been granted access to.
+          navigator.usb.getDevices().then(devices => {
+            devices.forEach(device => {
+              console.log(device.productName);      
+              console.log(device.manufacturerName); 
+            });
+          })
+      }
+    </script>   
   </head>
 <body>
   <p>test</p>
-    <iframe allowpaymentrequest allow="usb; fullscreen">
-
-    
-  </iframe>
+<input type="button" onclick="connectUSBDevice" value="test" />
 
 </body>
 </html>
